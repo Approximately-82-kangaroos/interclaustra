@@ -23,8 +23,8 @@ def send_file(filename, receiver):
     file = open(filename, "rb")
     file_size = os.path.getsize(filename)
 
-    file.send(str(file_size).encode("utf-8"))
-    
+    receiver.send(str(file_size).encode("utf-8"))
+
     data = file.read()
     receiver.sendall(data)
     file.close()
@@ -44,6 +44,8 @@ if (__name__ == "__main__"):
             if (inbuffer != "10"):
                 print("Invalid verification from client.")
                 s.close()
+            else:
+                send_file("test.txt", client)
 
 
     else:

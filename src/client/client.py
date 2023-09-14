@@ -16,3 +16,5 @@ if (__name__ == "__main__"):
     skt.connect((IP, PORT))
     skt.send("10".encode("utf-8"))
     size = int(skt.recv(1024).decode("utf-8"))
+    file = open("problem.py", "wb")
+    file.write(skt.recv(size))
