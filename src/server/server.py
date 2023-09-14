@@ -1,13 +1,14 @@
 # TODO:
 # Add server creation - Completed 9/13/2023
 # Add file sending - Completed 9/14/2023
-# Add argument sending
-# Add solution reception
+# Add argument sending - Completed 9/14/2023
+# Add solution reception - Completed 9/14/2023
 # Add secondary verification
 # https://www.youtube.com/watch?v=JkWdNrmbNEQ
 
 import socket
 import os
+import time
 
 DEF_PORT = 4279
 DEF_IP = "localhost"
@@ -25,6 +26,8 @@ def send_file(filename, receiver):
 
     receiver.send(str(file_size).encode("utf-8"))
 
+    time.sleep(1)
+
     data = file.read()
     receiver.sendall(data)
     file.close()
@@ -41,17 +44,16 @@ if (__name__ == "__main__"):
             # 1: Version (0x01)
             # 3: 0x00
             inbuffer = client.recv(2).decode("utf-8")
-            if (inbuffer != "1_0"):
+            if (inbuffer != "10"):
                 print("Invalid verification from client.")
                 s.close()
             else:
-                send_file("src/server/problem.py", client)
-                param_file = open("src/server/parameters.txt")
+                send_file("issue.py", client)
+                param_file = open("parameters.txt")
                 for lines in param_file:
-                    list = lines.split(", ")
-                    print(list)
+                    client.send(lines.encode("utf-8"))
+                    print(client.recv(1024).decode("utf-8"))
                 param_file.close()
-                s.close()
 
 
     else:
