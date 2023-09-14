@@ -7,10 +7,10 @@ This is a remake of a project I made in high school which was lost to a hard dri
 ## TODO list:
 - Create socket servers (Done)
 - Create file transfer (Done, janky. Sends entire file at once, not 1024-size packets)
-- Create function argument transfer
-- Create function processing on client
+- Create function argument transfer (Done)
+- Create function processing on client (Done)
   - Add multithreading support
-- Create function result transfer
+- Create function result transfer (Done)
 - Create secondary verification on server
 
 # How does/should it work at a high level?
