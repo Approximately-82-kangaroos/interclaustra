@@ -1,6 +1,6 @@
 # TODO:
 # Add server creation - Completed 9/13/2023
-# Add file sending
+# Add file sending - Completed 9/14/2023
 # Add argument sending
 # Add solution reception
 # Add secondary verification
@@ -41,11 +41,17 @@ if (__name__ == "__main__"):
             # 1: Version (0x01)
             # 3: 0x00
             inbuffer = client.recv(2).decode("utf-8")
-            if (inbuffer != "10"):
+            if (inbuffer != "1_0"):
                 print("Invalid verification from client.")
                 s.close()
             else:
-                send_file("test.txt", client)
+                send_file("src/server/problem.py", client)
+                param_file = open("src/server/parameters.txt")
+                for lines in param_file:
+                    list = lines.split(", ")
+                    print(list)
+                param_file.close()
+                s.close()
 
 
     else:
